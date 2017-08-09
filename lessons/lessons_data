@@ -1,0 +1,16 @@
+{
+  "location_summary": {
+    "split": "halves", 
+    "summary": {
+      "1": {
+        "trend": "increasing", 
+        "val2": 155.27502254283135, 
+        "val1": 177.51479289940832
+      }
+    }
+  }, 
+  "val2": 148.4690067214339, 
+  "val1": 163.17297541848893, 
+  "overall": "increasing", 
+  "pace": 148.4690067214339
+}
