@@ -1,7 +1,17 @@
+############################################################################
+# This file contains the code for the 2nd half of the data processing: taking
+# especially high/low blocks in a user's speech, and putting them in
+# time context: beginning, middle, end / first half, second half
+############################################################################
+
 import numpy as np
 
 # Determines whether more meaningful to split speech by thirds or halves
 def putInTimeContext(groups, category, duration):
+    if category == "normal":
+        results = {"split":"everywhere"}
+        return results
+
     speech_by_thirds = locateInTime(groups, category, "thirds", duration)
     thirds_std = speech_by_thirds["std"]
 
@@ -11,11 +21,9 @@ def putInTimeContext(groups, category, duration):
     if halves_std > thirds_std:
         split = "halves"
         summary = speech_by_halves["times_summary"]
-        print "halves (%f) > thirds (%f)" %(halves_std, thirds_std)
     else:
         split = "thirds"
         summary = speech_by_thirds["times_summary"]
-        print "thirds (%f) > halves (%f)" %(thirds_std, halves_std)
 
     results = {}
     if len(summary) == 0:
@@ -32,15 +40,13 @@ def putInTimeContext(groups, category, duration):
         results["split"] = split
         results["summary"] = summary
 
-    print "RESULTS:",results
     return results
 
 
 # Given a category to look for (high, low, or normal), scan the speech for that
 # category.
 def locateInTime(groups, category, split, duration):
-    print "cat:",category
-    if category == "same":
+    if category == "normal":
         return []
     else:
         summary = flagCategory(groups, category, split, duration)
@@ -122,7 +128,6 @@ def flagCategory(groups, category, split, duration):
             times_summary[str(i)] = {"trend":percentages[i]["trend"], "percentage":percentages[i]["percentage"],
                                     "index":percentages[i]["index"]}
 
-    print split, times_summary
     summary = {"std": np.std(np.array([x["percentage"] for x in percentages])), "times_summary": times_summary}
     return summary
 
@@ -152,7 +157,6 @@ def getTimeRanges(duration, split):
     return time_ranges
 
 
-
 # make data fit certain patterns to make for easier lexicalization:
 def clean(location_summary):
     cleaned = {}
@@ -173,7 +177,6 @@ def clean(location_summary):
             except KeyError as e:
                 cleaned["summary"] = {match_index:match}
 
-            print "CLEANED: turned into halves"
             return cleaned
 
         # otherwise, keep the more significant one and discard the other.

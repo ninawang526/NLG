@@ -1,0 +1,18 @@
+{
+  "elapsed_time": 199.44, 
+  "std": 25.438250533788477, 
+  "version": "full", 
+  "pace-value": 112.47473854564743, 
+  "trend": "low", 
+  "location_summary": {
+    "split": "halves", 
+    "summary": {
+      "0": {
+        "trend": "low", 
+        "val": 87.91366906474819
+      }
+    }
+  }, 
+  "average": 112.47473854564743, 
+  "speaking_time": 12.05
+}

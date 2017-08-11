@@ -1,0 +1,18 @@
+{
+  "std": 35.628964485501456, 
+  "trend": "low", 
+  "average": 123.81661182687068, 
+  "location_summary": {
+    "split": "thirds", 
+    "summary": {
+      "0": {
+        "trend": "low", 
+        "val": 117.45216847991848
+      }, 
+      "2": {
+        "trend": "low", 
+        "val": 105.81891084518715
+      }
+    }
+  }
+}
